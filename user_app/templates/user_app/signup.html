@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ja">
+ <head>
+   <meta charset="UTF-8">
+   <meta name="description" content=""/>
+   <link rel="stylesheet" href="{% static 'css/login.css' %}"> <!-- 追加 -->
+ </head>
+
+ <body>
+<div class="form-wrapper">
+  <h1>Create an account</h1>
+  <form>
+    <div class="form-item">
+      <label for="id_username" class="sr-only">User Name</label>
+      <input type="text" name="username" placeholder="User Name" maxlength="150" class="form-control mb-3" required id="id_username" autofocus></input>
+    </div>
+
+    <div class="form-item">
+      <label for="id_email" class="sr-only">Email Address</label>
+      <input type="email" name="email" placeholder="Email Address" maxlength="254" class="form-control mb-3" required id="id_email"></input>
+    </div>
+
+    <div class="form-item">
+      <label for="id_password1" class="sr-only">Password</label>
+      <input type="password" name="password1" placeholder="Password" autocomplete="new-password" class="form-control mb-3" id="id_password1"></input>
+    </div>
+
+    <div class="form-item">
+      <label for="id_password2" class="sr-only">Password(again)</label>
+      <input type="password" name="password2" placeholder="Password(again)" autocomplete="new-password" class="form-control mb-3" required id="id_password2"></input>
+    </div>
+
+
+    <div class="button-panel">
+      <input type="submit" class="button" title="Sign In" value="Sign Up"></input>
+    </div>
+  </form>
+  <div class="form-footer">
+    <p><a href="{% url 'user_app:login' %}">Sign In</a></p>
+  </div>
+</div>
+</body>
+</html>

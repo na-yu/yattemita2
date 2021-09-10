@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="mt-5 pt-4 text-center">DELETE TASK</h1>
+<br><br>
+<div style="text-align:center">
+<a href="{% url 'rehearsal:rhsl_detail' pk=object.id %}">
+<button type="button" class="btn btn-outline-light" style="color:#79c06e;">BACK</button></a>
+</div>
+<br>
+
+<div style="width: 400px; margin: auto;">
+<form method="post">{% csrf_token %}
+<div style="text-align:center">
+    <p>Delete Task？</p>
+    <button type="submit" class="btn btn-outline-light" style="color:#79c06e;">DELETE</button></a>
+    
+</form>
+
+<table class="table">
+    <tr><th>PROJECT</th><td>{{ object.production }}</td></tr>
+    <tr><th>DATE</th><td>{{ object.date }}</td></tr>
+    <tr><th>TASK</th><td>{{ object.note }}</td></tr>
+    <tr><th>STAFF</th><td>{{ object.member }}</td></tr>
+    <tr><th>PROGRESS</th><td>{{ object.prog }}</td></tr>
+</table>
+{% endblock %}

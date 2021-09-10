@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 style="margin: 0px;">
+<a href="{% url 'rehearsal:rhsl_list' prod_id=object.production.id %}">◀</a>
+TO DO LIST
+</h1>
+
+{% if view.prod_user.is_owner or view.prod_user.is_editor %}
+<div align="right"><a href="{% url 'rehearsal:rhsl_update' pk=object.id %}" class="changelink">ADD</a></div>
+{% else %}
+<div>&nbsp;</div>
+{% endif %}
+
+<table>
+    <tr><th>PROJECT</th><td>{{ object.production }}</td></tr>
+    <tr><th>DATE</th><td>{{ object.date|date:"Y年m月d日 (D)" }}</td></tr>
+    <tr><th>TASK</th><td>{{ object.note | urlize | linebreaksbr }}</td></tr>
+    <tr><th>STAFF</th><td>{{ object.member }}</td></tr>
+    <tr><th>PROGRESS</th><td>{{ object.prog }}</td></tr>
+</table>
+
+
+{% endblock %}

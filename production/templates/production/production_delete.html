@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="mt-5 pt-4 text-center">DELETE PROJECT</h1>
+<br><br>
+<div style="text-align:center">
+<a href="{% url 'production:prod_list' %}">
+<button type="button" class="btn btn-outline-light" style="color:#79c06e;">BACK</button></a>
+</div>
+<br>
+
+<div style="width: 400px; margin: auto;">
+<table class="table">
+    <tr><th>PROJECT:</th><td>{{ object.name }}</td></tr>
+</table>
+</div>
+
+<form method="post">{% csrf_token %}
+    <div style="text-align:center">
+    <p>Delete PLOJECT？</p>
+    <button type="submit" class="btn btn-outline-light" style="color:#79c06e;">DELETE</button></a>
+    <a href="{% url 'production:prod_list' %}">
+    <button type="button" class="btn btn-outline-light" style="color:#79c06e;">CANCELL</button></a>
+    
+    </div>
+</form>
+
+{% endblock %}

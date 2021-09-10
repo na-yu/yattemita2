@@ -1,0 +1,52 @@
+{% bootstrap_css %} <!-- 追加 -->
+{% bootstrap_javascript jquery='full' %} <!-- 追加 -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="description" content=""/>
+    <link rel="stylesheet" href="{% static 'css/bass.css' %}"> <!-- 追加 -->
+   <title>はかどるくん</title>
+
+   <!--for admin widgets--> 
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/widgets.css' %}"/>
+    <script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
+    {{ form.media }}}
+    <script type="text/javascript" src="{% static 'admin/js/core.js' %}"></script>
+    <script type="text/javascript" src="{% static 'admin/js/admin/RelatedObjectLookups.js' %}"></script>
+    <!--end for admin widgets -->
+    
+</head>
+ 
+ <body>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: #eb6ea0;" >
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="{% url 'root' %}">はかどるくん</a>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav mr-auto mt-2 mt-md-0">
+                <li class="nav-item">
+                <a class="nav-link" href="{% url 'production:prod_create' %}">NEW PROJECT</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="{% url 'user_app:login' %}">LOG OUT</a>
+                </li>
+            </ul>
+        </div>
+    
+    </nav>
+
+
+        {% block content %}{% endblock %}
+        
+        
+    </div>
+    
+    {% block javascript %}{% endblock %}
+</body>
+</html>

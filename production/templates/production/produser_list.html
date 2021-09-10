@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="mt-5 pt-4 text-center">MEMBER</h1>
+
+{% if view.prod_user.is_owner and view.invitations %}
+<div style="border:solid thin lightgray; border-radius:10px; padding: 10px; margin:5px 20px;">
+<p><strong>INVITED MEMBER</strong></p>
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>LIMIT</th>
+    </tr>
+    {% for item in view.invitations %}
+    <tr>
+        <td>{{ item.invitee.username }}</td>
+        <td>{{ item.invitee.first_name }}</td>
+        {% if item.expired %}
+            <td style="color:red;">{{ item.exp_dt }}</td>
+        {% else %}
+            <td>{{ item.exp_dt }}</td>
+        {% endif %}
+        <td><a href="{% url 'production:invt_delete' pk=item.id from='usr_list' %}" class="deletelink">
+        <button type="submit" class="btn btn-outline-light" style="color:#79c06e;"> DELETE</button></a></td>
+    </tr>
+{% endfor %}
+</table>
+</div>
+{% endif %}
+
+<div style="text-align:center">
+<a href="{% url 'root' %}">
+<button type="button" class="btn btn-outline-light" style="color:#79c06e;">BACK</button></a>
+</div>
+<br><br>
+
+
+
+<table class="table table-hover">
+    <thead>
+        <tr class="table-dark">
+            <th scope="col">NAME</th>
+            <th scope="col">ID</th>
+            <th scope="col">OWNER</th>
+            <th scope="col">EDITER</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+
+    <tbody>
+    {% for item in object_list %}
+    <tr>
+        <td>{{ item }}</td>
+        <td>{{ item.user.username }}</td>
+        <!--<td>{% if item.is_owner %}○{%else%}×{% endif %}</td>
+        <td>{% if item.is_editer %}○{%else%}×{% endif %}</td>-->
+        <td>{{ item.is_owner }}</td>
+        <td>{{ item.is_editor }}</td>
+        {% if view.prod_user.is_owner %}
+        <td>
+            <a href="{% url 'production:usr_update' pk=item.id %}" class="changelink">
+            <button type="button" class="btn btn-outline-light" style="color:#79c06e;">EDIT</button></a>
+        </td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+{% if view.prod_user.is_owner %}
+<br><br>
+<div style="text-align:center">
+<a href="{% url 'production:invt_create' prod_id=prod_id %}" class="addlink">
+<button type="button" class="btn btn-light" style="color:#79c06e;">INVITE</button></a>
+</div>
+{% else %}
+<div>&nbsp;</div>
+{% endif %}
+
+{% endblock %}

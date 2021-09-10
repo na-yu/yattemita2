@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="mt-5 pt-4 text-center">EDIT MEMBER</h1>
+<br>
+<div style="text-align:center">
+<a href="{% url 'production:usr_list' prod_id=object.production.id %}">
+<button type="button" class="btn btn-outline-light" style="color:#79c06e;">BACK</button></a>
+</div>
+<br><br>
+
+
+<div style="width: 400px; margin: auto;">
+<form method="post">
+    {% csrf_token %}
+    <table class="table">
+    <tr><th>PROJECT</th><td>{{ object.production }}</td></tr>
+    <tr><th>MEMBER</th><td>{{ object }}</td></tr>
+        {{ form }}
+    </table>
+    {% if object %}
+    <div style="text-align:center">
+    <div class="row">
+        <div class="col">
+        <button type="submit" class="btn btn-outline-light" style="color:#79c06e;">EDIT</button>
+        </div>
+    </div>
+    </div>
+
+    {% else %}
+    <div class="row">
+        <div class="col">
+        <button type="submit" class="btn btn-outline-light" style="color:#79c06e;">MAKE</button>
+        </div>
+    </div>
+    {% endif %}
+</form>
+
+{% if object != view.prod_user %}
+<div style="text-align:center">
+<a href="{% url 'production:usr_delete' pk=object.id %}" class="deletelink">
+<button type="button" class="btn btn-outline-light" style="color:#79c06e;">DELETE</button></a>
+</div>
+{% else %}
+<div>&nbsp;</div>
+{% endif %}
+</div>
+{% endblock %}

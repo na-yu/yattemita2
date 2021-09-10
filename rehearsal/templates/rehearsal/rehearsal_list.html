@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="mt-5 pt-4 text-center">TASK</h1>
+
+<div style="text-align:center">
+<a href="{% url 'root' %}">
+<button type="button" class="btn btn-outline-light" style="color:#79c06e;">BACK</button></a>
+</div>
+<br><br>
+
+
+<table class="table table-hover">
+    <thead>
+        <tr class="table-dark">
+            <td align="center">DATE</td>
+            <td>TASK</td>
+            <td>STAFF</td>
+            <td>PROGRESS</td>
+        </tr>
+    </thead>
+
+    <tbody>
+    {% for item in object_list %}
+    <tr>
+        <td align="center">
+            {{ item.date|date:"m/d(D)" }}
+        </td>
+        <td style="color:#79c06e;">
+         <a href="{% url 'rehearsal:rhsl_update' pk=item.id %}" style="color:#eb6ea0;">
+         {{ item.note }}</a></td>
+        <td>{{ item.member }}</td>
+        <td>{{ item.prog }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+
+{% if view.prod_user.is_owner or view.prod_user.is_editor %}
+<br><br>
+<div style="text-align:center">
+<a href="{% url 'rehearsal:rhsl_create' prod_id=prod_id %}" class="addlink">
+<button type="button" class="btn btn-light" style="color:#79c06e;">ADD</button></a>
+</div>
+{% else %}
+<div>&nbsp;</div>
+{% endif %}
+{% endblock %}
+

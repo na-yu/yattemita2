@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ view.production }}</h1>
+
+<hr>
+<ul>
+<li><a href="{% url 'rehearsal:rhsl_list' prod_id=view.production.id %}">
+    タスク一覧</a></li>
+
+<li><a href="{% url 'production:usr_list' prod_id=view.production.id %}">
+    メンバ一</a></li>
+
+{% endblock %}

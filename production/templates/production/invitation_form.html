@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %} <!-- 追加 -->
+{% block content %}
+<h1 class="mt-5 pt-4 text-center">INVITATION</h1>
+<br><br>
+<div style="text-align:center">
+<a href="{% url 'production:usr_list' prod_id=view.production.id %}">
+<button type="button" class="btn btn-outline-light" style="color:#79c06e;">BACK</button></a>
+</div>
+<br><br>
+
+<div style="width: 400px; margin: auto;">
+<form method="post">
+    {% csrf_token %}
+    <table class="table">
+    <tr><th>PROJECT</th><td>{{ view.production }}</td></tr>
+    <tr><th>INVITED ID</th>
+    <td><input type="text" name="invitee_id" placeholder="INVITED ID" maxlength="20" class="form-control mb-3" required id="invitee_id"></td></tr>
+    </table>
+    <div style="text-align:center">
+    <div class="row">
+        <div class="col">
+        <button type="submit" class="btn btn-outline-light" style="color:#79c06e;">INVITE</button>
+        </div>
+    </div>
+    </div>
+   
+</form>
+</div>
+
+{% endblock %}
+
+<!--<input type="text" name="invitee_id" />-->

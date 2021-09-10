@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="mt-5 pt-4 text-center">JOIN</h1>
+<div style="text-align:center">
+<br><br>
+</h1>
+
+<div>&nbsp;</div>
+
+<p>
+You invited "{{ view.production }}". Let's Join !
+</p>
+
+<form method="post">
+    {% csrf_token %}
+    <input type="hidden" name="production" value="{{ view.production.id }}">
+    <input type="hidden" name="user" value="{{ view.request.user.id }}">
+    <button type="submit" class="btn btn-outline-light" style="color:#79c06e;">JOIN</button>
+    <a href="{% url 'production:prod_list' %}">
+    <button type="button" class="btn btn-outline-light" style="color:#79c06e;">LATER</button></a>
+</form>
+</div>
+{% endblock %}

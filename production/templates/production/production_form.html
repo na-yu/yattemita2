@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+{% if object %}
+<h1 class="mt-5 pt-4 text-center">EDIT PROJECT</h1>
+<br><br>
+{% else %}
+<h1 class="mt-5 pt-4 text-center">NEW PROJECT</h1>
+<br><br>
+{% endif %}
+
+<div style="width: 400px; margin: auto;">
+<form method="post">
+    {% csrf_token %}
+    <table class="table">
+        {{ form }}
+    </table>
+    <br>
+    {% if object %}
+    
+    <div style="text-align:center">
+    <div class="row">
+        <div class="col">
+        <button type="submit" class="btn btn-outline-light" style="color:#79c06e;">RENAME</button>
+        </div>
+    </div>
+    </div>
+    
+    {% else %}
+    <div style="text-align:center">
+    <div class="row">
+        <div class="col">
+        <button type="submit" class="btn btn-outline-light" style="color:#79c06e;">MAKE</button>
+        </div>
+    </div>
+    </div>
+    {% endif %}
+</form>
+
+
+
+
+    {% if object %}
+    <a href="{% url 'production:prod_delete' pk=object.id %}" class="deletelink">
+    <div style="text-align:center">
+    <div class="row">
+        <div class="col">
+        <button type="submit" class="btn btn-outline-light" style="color:#79c06e;">DELETE</button></a>
+        </div>
+    <div>
+    </div>
+    {% else %}
+    <div>&nbsp;</div>
+    {% endif %}
+</div>
+
+
+
+{% endblock %}
+

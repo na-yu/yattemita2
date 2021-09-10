@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<h1 class="mt-5 pt-4 text-center">PROJECT</h1>
+
+{% if view.invitations %}
+<div style="border:solid thin lightgray; border-radius:10px; padding: 10px; margin:5px 20px;">
+<p><strong>INVITED PROJECT</strong></p>
+<table class="table">
+    <tr>
+        <th>PROJECT</th>
+        <th>FROM</th>
+        <th>LIMIT</th>
+    </tr>
+    {% for item in view.invitations %}
+    <tr>
+        <td>{{ item.production }}</td>
+        <td>{{ item.inviter.username }}</td>
+        {% if item.expired %}
+            <td style="color:red;">{{ item.exp_dt }}</td>
+        {% else %}
+            <td>{{ item.exp_dt }}</td>
+        {% endif %}
+        <td>
+            <a href="{% url 'production:prod_join' invt_id=item.id %}" class="addlink">
+            <button type="submit" class="btn btn-outline-light" style="color:#79c06e;">JOIN</button></a>
+            <a href="{% url 'production:invt_delete' pk=item.id from='prod_list' %}" class="deletelink">
+            <button type="submit" class="btn btn-outline-light" style="color:#79c06e;">DELETE</button></a>
+        </td>
+    </tr>
+{% endfor %}
+</table>
+</div>
+{% endif %}
+
+<div class="d-flex justify-content-center flex-wrap">
+    {% for item in object_list %}
+    <div class="card m-4 text-center" style="min-width: 300; max-height: 490;">
+        <div class="cardbody">
+            <br>
+            <a href="{% url 'production:prod_update' pk=item.production.id %}" class="changelink" style="color:#eb6ea0">
+            <h4 class="item-title" style="color:#eb6ea0">{{item.production|truncatechars:10 | linebreaksbr}}</h4></a>
+            <p></p>
+            <p>OWNER　 {{item.is_owner}}</p>
+            <p>EDITER　{{item.is_editor}}</p>
+            
+
+            <a href="{% url 'rehearsal:rhsl_list' prod_id=item.production.id %}">
+            <button type="button" class="btn btn-outline-light btn-xs" style="color:#79c06e;">　TASK　</button></a>
+            <a href="{% url 'production:usr_list' prod_id=item.production.id %}">
+            <button type="button" class="btn btn-outline-light btn-xs" style="color:#79c06e;">  MEMBER  </button></a>
+            <br>
+            <br>
+
+        </div>
+    </div>
+    {% endfor %}
+</div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+{% endblock %}
