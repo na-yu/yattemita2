@@ -1,0 +1,7 @@
+.vscode
+__pycache__
+env
+staticfiles
+postgresql_psycopg2
+*.py[co]
+local_settings.py
